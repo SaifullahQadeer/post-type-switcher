@@ -160,3 +160,35 @@ function save_custom_post_type($post_id) {
 
 add_action('save_post', 'save_custom_post_type');
 
+// Add a filter to check for updates
+add_filter('pre_set_site_transient_update_plugins', 'check_for_plugin_update');
+
+function check_for_plugin_update($transient) {
+    if (empty($transient->checked)) {
+        return $transient;
+    }
+
+    // Your plugin folder name (change it to match your folder structure)
+    $plugin_slug = 'post-type-switcher/post-type-switcher.php';
+
+    // Get the current version of the installed plugin
+    $current_version = $transient->checked[$plugin_slug];
+
+    // Define the URL of your GitHub release ZIP archive
+    $github_release_url = 'https://github.com/SaifullahQadeer/post-type-switcher/archive/refs/tags/post-type-switcher.zip';
+
+    // Get the latest version number from the ZIP archive's URL
+    preg_match('/\/([^\/]+)\.zip$/', $github_release_url, $matches);
+    $latest_version = isset($matches[1]) ? $matches[1] : false;
+
+    // Check if a newer version is available
+    if ($latest_version && version_compare($current_version, $latest_version, '<')) {
+        $transient->response[$plugin_slug] = (object) array(
+            'new_version' => $latest_version,
+            'package' => $github_release_url,
+            'url' => 'https://alphawebcreation.com/plugins', // Replace with your plugin info page URL
+        );
+    }
+
+    return $transient;
+}
