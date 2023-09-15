@@ -5,13 +5,11 @@
  * Plugin Name: Post Type Switcher
  * Plugin URI:  https://alphawebcreation.com/plugins/
  * Description: Allows users to switch a post to a custom post type or back to default posts.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Alpha Web Creation
  * Author URI:  https://alphawebcreation.com/
- * License:     GPLv2 or later
+ * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * Text Domain: classic-editor
- * Domain Path: /languages
  * Requires at least: 4.9
  * Requires PHP: 5.2.4
  * Tested up to: 6.3
